@@ -1,5 +1,6 @@
 .poster__photo{
     object-fit: cover;
-    max-width: 282px;
+    width: 282px;
+    height: 282px;
 }
 

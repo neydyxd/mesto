@@ -3,6 +3,8 @@
     overflow: hidden;
     background: white;
     max-width: 282px;
+    position: relative;
+    z-index: 0;
 
 }
 

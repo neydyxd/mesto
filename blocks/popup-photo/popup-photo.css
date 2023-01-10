@@ -1,4 +1,4 @@
-.popup{
+.popup-photo{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.9);
     visibility: hidden;
     transition: visibility 0.5s, opacity 0.5s linear;
     opacity: 0;

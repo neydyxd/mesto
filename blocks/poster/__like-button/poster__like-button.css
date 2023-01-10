@@ -12,7 +12,3 @@
     opacity: 0.5;
 }
 
-.poster__like-button:active{
-    background: url(../../../images/like-black.png) center center no-repeat;
-    opacity: 1;
-}
