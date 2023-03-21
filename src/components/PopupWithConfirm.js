@@ -14,18 +14,21 @@ class PopupWithConfirm extends Popup {
     this._cardId = cardId;
   }
 
+  changeSubmitHandler(func) {
+    this._deleteMyCard = func;
+  }
+
   setEventListeners() {
     this._form.addEventListener(`submit`, (e) => {
       e.preventDefault();
-      this._deleteMyCard(this._cardId, this._card);
-      this.close();
+      this._deleteMyCard();
     });
     super.setEventListeners();
   }
   
   renderLoadingDelete(isLoading) {
     if (isLoading) {
-      this._buttonSubmitDelete.textContent = "Сохранение...";
+      this._buttonSubmitDelete.textContent = "Удаление...";
     } else {
       this._buttonSubmitDelete.textContent = "Да";
     }

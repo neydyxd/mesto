@@ -1,6 +1,6 @@
 
 import {config} from '../components/config.js';
-import { initialCards } from '../components/Contains.js';
+import { initialCards } from '../utils/contains.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -50,7 +50,7 @@ validationCardForm.enableValidation();
 const validationAvatarForm = new FormValidator(config, popupOverlayAvatar);
 validationAvatarForm.enableValidation();
 
-const cardDelete = new PopupWithConfirm(popupDelete, deleteMyCard);
+const cardDelete = new PopupWithConfirm(popupDelete);
 
 const api = new Api(
   `https://mesto.nomoreparties.co/v1/cohort-61`,
@@ -72,7 +72,24 @@ function createCard(item) {
     currentUserId,
     `.poster-template`,
     handleCardClick,
-    handleCardByClick,
+    (id) => {
+      cardDelete.open();
+      cardDelete.changeSubmitHandler(() => {
+        cardDelete.renderLoadingDelete(true);
+        api
+          .deleteCard(id)
+          .then(() => {
+            card.handleRemoveCard();
+            cardDelete.close();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            cardDelete.renderLoadingDelete(false);
+          });
+      });
+    },
     likeMyCard,
     deletelikeMyCard
   );
@@ -84,21 +101,6 @@ function handleCardByClick(id, cardElement) {
   cardDelete.open(id, cardElement);
 }
 
-function deleteMyCard(id, cardElement) {
-  cardDelete.renderLoadingDelete(true);
-  api
-    .deleteCard(id)
-    .then(() => {
-      cardElement.remove();
-      cardDelete.close();
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      cardDelete.renderLoadingDelete(false);
-    });
-}
 
 function likeMyCard(id, cardElement) {
   api
@@ -136,6 +138,7 @@ const popupAddCard = new PopupWithForm(popupAdd, (data) => {
   popupAddCard.renderLoadingSave(true);
   api.createNewCard(data).then((newItem) => {
     cardList.addItem(createCard(newItem));
+    popupAddCard.close()
   })
   .catch((err) => {
     console.log(err);
@@ -169,9 +172,7 @@ avatarButton.addEventListener('click', () => {
   popupAvatar.open();
 });
 
-buttonCloseAvatar.addEventListener('click', () => {
-  popupAvatar.close();
-});
+
 
 popupAvatar.setEventListeners();
 
@@ -216,17 +217,8 @@ buttonAdd.addEventListener('click', () => {
   popupAddCard.open();
   });
   
-buttonCloseAdd.addEventListener('click', () => {
-  popupAddCard.close();
-  });
 
-imagePopupCloseButton.addEventListener('click', () => {
-  popupWithImage.close();
-  });
-  
-buttonCloseEdit.addEventListener('click', () => {
-  popupEditProfile.close();
-    });
+
   
 
     function handleCardClick(name, link) {

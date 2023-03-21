@@ -72,7 +72,7 @@ class Card {
     }
 
     //при открытие саайта видим поставлены лайки пользователем, либо нет
-    if (this._addlikedCard()) {
+    if (this._checkLike()) {
       this._iconLike.classList.add(`poster__like-button_active`);
     } else {
       this._iconLike.classList.remove(`poster__like-button_active`);
@@ -98,8 +98,12 @@ class Card {
   }
 
   //способ понять лайк поставлен пользователем, либо нет
-  _addlikedCard() {
+  _checkLike() {
     return this._likes.find((userLike) => userLike._id === this._currentUserId);
+  }
+
+  handleRemoveCard() {
+    this._element.remove();
   }
 }
 export default Card;

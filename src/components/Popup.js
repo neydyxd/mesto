@@ -25,9 +25,6 @@ class Popup {
         if (evt.target.classList.contains(`popup_opened`)) {
           this.close();
         }
-        if (evt.target.classList.contains(`popup__close`)) {
-          this.close();
-        }
       });
     }
   }
