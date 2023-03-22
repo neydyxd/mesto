@@ -49,7 +49,8 @@ class FormValidator {
   //Функция, которая добавляет класс кнопки
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._disableSubmitButton();
+      this._formButton.classList.add(this._config.inactiveButtonClass);
+      this._formButton.setAttribute(`disabled`,`disabled`);
     } else {
       this._formButton.classList.remove(this._config.inactiveButtonClass);
       this._formButton.removeAttribute(`disabled`);
@@ -69,7 +70,7 @@ class FormValidator {
   }
 
   //Чтоб не было возможности 2 раза нажать
-  _disableSubmitButton() {
+  disableSubmitButton() {
     this._formButton.classList.add(this._config.inactiveButtonClass);
     this._formButton.setAttribute(`disabled`, `disabled`);
   }
