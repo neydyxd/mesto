@@ -215,6 +215,7 @@ buttonEdit.addEventListener(`click`, (e) => {
 
 buttonAdd.addEventListener('click', () => {
   popupAddCard.open();
+  validationCardForm.disableSubmitButton();
   });
   
 
