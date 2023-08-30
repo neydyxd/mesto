@@ -16,7 +16,7 @@
 ---
 ## Инструкция по установке:
 1. Клонировать репозиторий
-`git clone https://github.com/Sonyamaster1/mesto.git`
+`git clone https://github.com/neydyxd/mesto.git`
 2. Установить зависимости
 `npm i`
 3. Запустить проект локально
